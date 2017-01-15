@@ -4,32 +4,17 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View
 } from 'react-native';
 
-export default class havens extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+import Header from './src/components/header';
+
+const App = () => (
+	<Header headerText="Havens" />
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -50,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('havens', () => havens);
+AppRegistry.registerComponent('havens', () => App);
