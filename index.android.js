@@ -6,14 +6,19 @@
 
 import React from 'react';
 import {
+  View,
   AppRegistry,
   StyleSheet,
 } from 'react-native';
 
-import Header from './src/components/header';
+import Header from './src/components/Header';
+import AlbumList from './src/components/AlbumList';
 
 const App = () => (
-	<Header headerText="Havens" />
+  <View>
+    <Header headerText="Havens" />
+    <AlbumList />
+  </View>
 );
 
 const styles = StyleSheet.create({
