@@ -28,7 +28,6 @@ class AlbumList extends Component {
             </ScrollView>
         );     
     }
-
-};
+}
 
 export default AlbumList;

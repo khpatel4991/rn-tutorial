@@ -6,14 +6,21 @@ import Button from './Button';
 
 const AlbumDetail = ({ album }) => {
     const { title, artist, image, thumbnail_image, url } = album;
-    const { thumbnailStyle, headerTextStyle, thumbnailContainerStyle, headerContentStyle, imageStyle } = styles;
+    const { 
+        thumbnailStyle, 
+        headerTextStyle, 
+        thumbnailContainerStyle, 
+        headerContentStyle, 
+        imageStyle 
+    } = styles;
     return (
         <Card>
             <CardItem>
                 <View style={thumbnailContainerStyle}>
                     <Image 
                         style={thumbnailStyle}
-                        source={{ uri: thumbnail_image }} />
+                        source={{ uri: thumbnail_image }} 
+                    />
                 </View>
 
                 <View style={headerContentStyle}>
@@ -25,7 +32,8 @@ const AlbumDetail = ({ album }) => {
             <CardItem>
                 <Image 
                     style={imageStyle}
-                    source={{ uri: image }} />
+                    source={{ uri: image }} 
+                />
             </CardItem>
 
             <CardItem>
@@ -37,7 +45,7 @@ const AlbumDetail = ({ album }) => {
             </CardItem>
 
         </Card>
-    )
+    );
 };
 
 const styles = {
@@ -63,6 +71,6 @@ const styles = {
         flex: 1,
         width: null
     }
-}
+};
 
 export default AlbumDetail;
