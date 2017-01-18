@@ -2,30 +2,60 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import firebase from 'firebase';
 
-import { Header } from './components/common';
+import { Header, Button, Spinner } from './components/common';
 import LoginForm from './components/LoginForm';
-
+import firebaseConfig from './firebaseConfig';
 
 class App extends Component {
 
+    state = {
+        loggedIn: null
+    };
+
     componentWillMount() {
-        const config = {
-            apiKey: 'AIzaSyAsfmEcfz8DA8lQis9K4BlcqPzhazs0lqE',
-            authDomain: 'haven-auth-fc4b3.firebaseapp.com',
-            databaseURL: 'https://haven-auth-fc4b3.firebaseio.com',
-            storageBucket: 'haven-auth-fc4b3.appspot.com',
-            messagingSenderId: '1081453127449'
-        };
-        firebase.initializeApp(config);
+        firebase.initializeApp(firebaseConfig);
+        firebase.auth().onAuthStateChanged((user) => {
+            //If signed out, user === null
+            //If signed in, user is user obj
+            console.log(user);
+            if (user) {
+                this.setState({ loggedIn: true });
+            } else {
+                this.setState({ loggedIn: false });
+            }
+        });
+    }
+
+    renderContent() {
+        switch (this.state.loggedIn) {
+            case true:
+                return (
+                    <Button onPress={() => firebase.auth().signOut()} >
+                        Log Out
+                    </Button>
+                );
+            case false:
+                return <LoginForm />;
+            default:
+                //DontKnow if logged in
+                return <Spinner />;
+        }
     }
 
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <Header headerText="Authentication" />
-                <LoginForm />
+                {this.renderContent()}
             </View>
         );
+    }
+}
+
+const styles = {
+    spinnerContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 }
 
