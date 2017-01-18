@@ -1,13 +1,61 @@
 import React, { Component } from 'react';
-
-import { Card, CardItem, Button, Input } from './common';
+import { Text } from 'react-native';
+import firebase from 'firebase';
+import { Card, CardItem, Button, Input, Spinner } from './common';
 
 class LoginForm extends Component {
 
     state = {
         email: '',
-        password: ''
+        password: '',
+        error: '',
+        loading: false
     };
+
+    onButtonPress() {
+        const { email, password } = this.state;
+
+        this.setState({ 
+            error: '',
+            loading: true
+        });
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(this.onLoginSuccess.bind(this))
+            .catch(() => {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(this.onLoginSuccess.bind(this))
+                    .catch(this.onLoginFail.bind(this));
+            });
+    }
+
+    onLoginFail() {
+        this.setState({ 
+            error: 'Auth Failed',
+            loading: false
+        });
+    }
+
+    onLoginSuccess() {
+        //CLear fields, remove loader
+        this.state({
+            email: '',
+            password: '',
+            loading: false,
+            error: '' 
+        });
+    }
+
+    renderButton() {
+        if (this.state.loading) {
+            return <Spinner />;
+        }
+        return (
+            <Button onPress={this.onButtonPress.bind(this)}>
+                Login/Signup
+            </Button>
+        )
+        
+    }
 
     render() {
         console.log(this.state);
@@ -39,13 +87,23 @@ class LoginForm extends Component {
                     />
                 </CardItem>
 
+                <Text style={styles.errorTextStyles}>
+                    {this.state.error}
+                </Text>
+
                 <CardItem>
-                    <Button>
-                        Login/Signup
-                    </Button>
+                    {this.renderButton()}
                 </CardItem>
             </Card>
         );
+    }
+}
+
+const styles = {
+    errorTextStyles: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red',
     }
 }
 
