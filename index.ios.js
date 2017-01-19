@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './src/App';
+import AppWithRedux from './src/AppWithRedux';
 
-AppRegistry.registerComponent('havens', () => App);
+AppRegistry.registerComponent('havens', () => AppWithRedux);
