@@ -52,11 +52,4 @@ class App extends Component {
     }
 }
 
-const styles = {
-    spinnerContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-}
-
 export default App;
