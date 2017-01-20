@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Text, View, TouchableWithoutFeedback } from 'react-native';
+import { 
+    Platform,
+    UIManager,
+    Text, 
+    View, 
+    TouchableWithoutFeedback,
+    LayoutAnimation
+} from 'react-native';
 import { CardItem } from './common';
 
 import * as actions from '../actions';
 
 class ListLibraryItem extends Component {
 
+    constructor(props) {
+        super(props);
+        if (Platform.OS === 'android') {
+            UIManager.setLayoutAnimationEnabledExperimental 
+                && UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
+    }
+
+    componentWillUpdate() {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+    }
+
     renderDescription() {
         const { library, expanded } = this.props;
         if (expanded) {
             return (
-                <Text>{library.description}</Text>
+                <CardItem>
+                    <Text style={{ flex: 1 }}>
+                        {library.description}
+                    </Text>
+                </CardItem>
             );
         }
     }
