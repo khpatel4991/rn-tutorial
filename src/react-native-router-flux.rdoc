@@ -1,0 +1,15 @@
+Types of Flows
+Authentication
+Main Flow
+
+Idea of Scene:
+
+Distinct page To Navigate To
+
+3 distict screens
+
+Screen PropTypes:
+key - distinct (use: to jump to)
+component - what component to show
+title
+initial
