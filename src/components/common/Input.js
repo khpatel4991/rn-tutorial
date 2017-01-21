@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { View, Text, TextInput } from 'react-native';
 
 const Input = (props) => {
@@ -23,14 +23,36 @@ const Input = (props) => {
                 label={label}
                 placeholder={placeholder}
                 value={value}
-                keyboardType={keyboardType}
-                returnKeyType={returnKeyType}
-                secureTextEntry={secureTextEntry}
-                autoCorrect={autoCorrect}
+                keyboardType={keyboardType || 'default'}
+                returnKeyType={returnKeyType || 'next'}
+                secureTextEntry={secureTextEntry || false}
+                autoCorrect={autoCorrect || true}
                 onChangeText={onChangeText}
             />
         </View>
     );
+};
+
+Input.PropTypes = {
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
+    value: PropTypes.string.isRequired,
+    keyboardType: PropTypes.oneOf([
+        'default',
+        'numeric',
+        'email-address',
+        'phone-pad'
+    ]),
+    returnKeyType: PropTypes.oneOf([
+        'done',
+        'go',
+        'next',
+        'search',
+        'send'
+    ]),
+    secureTextEntry: PropTypes.bool,
+    autoCorrect: PropTypes.bool,
+    onChangeText: PropTypes.func.isRequired
 };
 
 const styles = {

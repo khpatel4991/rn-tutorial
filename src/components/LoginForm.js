@@ -53,8 +53,7 @@ class LoginForm extends Component {
             <Button onPress={this.onButtonPress.bind(this)}>
                 Login/Signup
             </Button>
-        )
-        
+        );   
     }
 
     render() {
@@ -105,6 +104,6 @@ const styles = {
         alignSelf: 'center',
         color: 'red',
     }
-}
+};
 
 export default LoginForm;
