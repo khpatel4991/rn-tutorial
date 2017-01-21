@@ -1,6 +1,6 @@
 Types of Flows
-Authentication
-Main Flow
+Authentication (Signup/Login Screen)
+Main Flow (Navigating through app)
 
 Idea of Scene:
 
