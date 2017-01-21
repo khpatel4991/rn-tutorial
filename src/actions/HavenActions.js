@@ -1,7 +1,11 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
-import { HAVEN_FORM_UPDATE, HAVEN_FORM_CREATE_SUCCESS } from './types';
+import { 
+    HAVEN_FORM_UPDATE, 
+    HAVEN_FORM_CREATE_SUCCESS,
+    HAVENS_FETCH_SUCCESS
+} from './types';
 
 export const havenFormUpdate = ({ prop, value }) => ({
     type: HAVEN_FORM_UPDATE,
@@ -22,5 +26,19 @@ export const havenCreate = (newHavenData) => {
         firebase.database().ref(`/users/${currentUser.uid}/havens`)
             .push(newHavenData)
             .then(() => havenCreatedSuccess(dispatch));
+    };
+};
+
+export const fetchHavens = () => {
+    const { currentUser } = firebase.auth();
+
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/havens`)
+            .on('value', snapshot => {
+                dispatch({
+                    type: HAVENS_FETCH_SUCCESS,
+                    payload: snapshot.val()
+                });
+            });
     };
 };

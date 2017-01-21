@@ -33,7 +33,6 @@ class LoginFormRedux extends Component {
 	}
 
     render() {
-        console.log(this.props);
         const { email, password, error } = this.props;
         return (
             <View>
