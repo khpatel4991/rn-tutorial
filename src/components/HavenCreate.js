@@ -27,7 +27,7 @@ class HavenCreate extends Component {
     render() {
 
         const { streetAddress, streetAddress2, city, zip, state, name } = this.props;
-
+        console.log(name);
         return (
             <Card>
                 <CardItem>
@@ -95,7 +95,7 @@ class HavenCreate extends Component {
 
                 <CardItem>
                     <Input
-                        state={name}
+                        value={name}
                         label='Haven Name'
                         placeholder='My Home'
                         onChangeText={(value) => this.props.havenFormUpdate({ 
