@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import { Card, CardItem, Button } from './common';
 import HavenForm from './HavenForm';
-import { havenCreate } from '../actions';
+import { havenEdit, havenFormUpdate } from '../actions';
 
-class HavenCreate extends Component {
+class HavenEdit extends Component {
     
+    componentWillMount() {
+        _.forEach(this.props.haven, (value, prop) => {
+            this.props.havenFormUpdate({ prop, value });
+        });
+    }
+
     onButtonPress() {
         const { 
             streetAddress,
@@ -16,13 +23,16 @@ class HavenCreate extends Component {
             state,
             name
         } = this.props;
-        this.props.havenCreate({
+        const { uid } = this.props.haven;
+        console.log(streetAddress);
+        this.props.havenEdit({
             streetAddress,
             streetAddress2,
             zip,
             city,
-            state: state || 'ny',
-            name
+            state,
+            name,
+            uid
         });
     }
 
@@ -32,7 +42,7 @@ class HavenCreate extends Component {
                 <HavenForm {...this.props} />
                 <CardItem>
                     <Button onPress={this.onButtonPress.bind(this)}>
-                        Create Haven
+                        Edit Haven
                     </Button>
                 </CardItem>
             </Card>
@@ -49,4 +59,4 @@ const mapStateToProps = ({ havenForm }) => ({
     name: havenForm.name
 });
 
-export default connect(mapStateToProps, { havenCreate })(HavenCreate);
+export default connect(mapStateToProps, { havenFormUpdate, havenEdit })(HavenEdit);

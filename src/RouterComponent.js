@@ -5,6 +5,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 
 import LoginFormRedux from './components/LoginFormRedux';
 import HavenCreate from './components/HavenCreate';
+import HavenEdit from './components/HavenEdit';
 import HavenList from './components/HavenList';
 
 export default class RouterComponent extends Component {
@@ -25,9 +26,14 @@ export default class RouterComponent extends Component {
                         initial
                     />
                     <Scene
+                        key='havenEdit'
+                        component={HavenEdit}
+                        title='Edit Haven'
+                    />
+                    <Scene
                         key='havenCreate'
                         component={HavenCreate}
-                        title='Create New'
+                        title='Create New Haven'
                     />
                 </Scene>
             </Router>

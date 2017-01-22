@@ -6,3 +6,4 @@ export const LOGIN_USER_START = 'login_user';
 export const HAVEN_FORM_UPDATE = 'haven_form_update';
 export const HAVEN_FORM_CREATE_SUCCESS = 'haven_form_create_success';
 export const HAVENS_FETCH_SUCCESS = 'havens_fetch_success';
+export const HAVEN_SAVE_SUCCESS = 'haven_save_success';

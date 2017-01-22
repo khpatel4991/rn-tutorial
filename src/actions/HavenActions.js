@@ -4,7 +4,8 @@ import { Actions } from 'react-native-router-flux';
 import { 
     HAVEN_FORM_UPDATE, 
     HAVEN_FORM_CREATE_SUCCESS,
-    HAVENS_FETCH_SUCCESS
+    HAVENS_FETCH_SUCCESS,
+    HAVEN_SAVE_SUCCESS
 } from './types';
 
 export const havenFormUpdate = ({ prop, value }) => ({
@@ -26,6 +27,35 @@ export const havenCreate = (newHavenData) => {
         firebase.database().ref(`/users/${currentUser.uid}/havens`)
             .push(newHavenData)
             .then(() => havenCreatedSuccess(dispatch));
+    };
+};
+
+export const havenEdit = (newHavenData) => {
+    const { currentUser } = firebase.auth();
+    console.log(newHavenData);
+    const {
+        streetAddress,
+        streetAddress2,
+        zip,
+        city,
+        state,
+        name,
+        uid
+    } = newHavenData;
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/havens/${uid}`)
+            .set({
+                streetAddress,
+                streetAddress2,
+                zip,
+                city,
+                state,
+                name
+            })
+            .then(() => {
+                dispatch({ type: HAVEN_SAVE_SUCCESS });
+                Actions.havenList({ reset: true });
+            });
     };
 };
 
