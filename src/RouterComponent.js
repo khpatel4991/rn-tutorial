@@ -7,6 +7,7 @@ import LoginFormRedux from './components/LoginFormRedux';
 import HavenCreate from './components/HavenCreate';
 import HavenEdit from './components/HavenEdit';
 import HavenList from './components/HavenList';
+import MapHavenView from './components/MapHavenView';
 
 export default class RouterComponent extends Component {
     render() {
@@ -35,6 +36,9 @@ export default class RouterComponent extends Component {
                         component={HavenCreate}
                         title='Create New Haven'
                     />
+                </Scene>
+                <Scene key='map' initial>
+                    <Scene key='havenMap' component={MapHavenView} title='Maps' />
                 </Scene>
             </Router>
         );
