@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import Communications from 'react-native-communications';
 
 import { Card, CardItem, Button } from './common';
 import HavenForm from './HavenForm';
@@ -36,10 +37,20 @@ class HavenEdit extends Component {
         });
     }
 
+    onTextPress() {
+        //Ideally get number from haven props
+        Communications.text('3092695414', `Text from RN with haven selected ${this.props.haven.name}`);
+    }
+
     render() {
         return (
             <Card>
                 <HavenForm {...this.props} />
+                <CardItem>
+                    <Button onPress={this.onTextPress.bind(this)}>
+                        Text Me
+                    </Button>
+                </CardItem>
                 <CardItem>
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Edit Haven

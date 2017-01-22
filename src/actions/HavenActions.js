@@ -3,9 +3,9 @@ import { Actions } from 'react-native-router-flux';
 
 import { 
     HAVEN_FORM_UPDATE, 
-    HAVEN_FORM_CREATE_SUCCESS,
+    HAVEN_CREATE_SUCCESS,
     HAVENS_FETCH_SUCCESS,
-    HAVEN_SAVE_SUCCESS
+    HAVEN_EDIT_SUCCESS
 } from './types';
 
 export const havenFormUpdate = ({ prop, value }) => ({
@@ -15,7 +15,7 @@ export const havenFormUpdate = ({ prop, value }) => ({
 
 const havenCreatedSuccess = (dispatch) => {
     dispatch({
-        type: HAVEN_FORM_CREATE_SUCCESS
+        type: HAVEN_CREATE_SUCCESS
     });
     Actions.havenList({ type: 'reset' });
 };
@@ -53,7 +53,7 @@ export const havenEdit = (newHavenData) => {
                 name
             })
             .then(() => {
-                dispatch({ type: HAVEN_SAVE_SUCCESS });
+                dispatch({ type: HAVEN_EDIT_SUCCESS });
                 Actions.havenList({ reset: true });
             });
     };
