@@ -30,6 +30,17 @@ export const havenCreate = (newHavenData) => {
     };
 };
 
+export const havenDelete = ({ uid }) => {
+    const { currentUser } = firebase.auth();
+    return () => {
+        firebase.database().ref(`/users/${currentUser.uid}/havens/${uid}`)
+            .remove()
+            .then(() => {
+                Actions.havenList({ reset: true });
+            });
+    };
+};
+
 export const havenEdit = (newHavenData) => {
     const { currentUser } = firebase.auth();
     console.log(newHavenData);
