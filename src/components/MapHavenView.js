@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
+
+import { regionChanged } from '../actions';
 
 class MapHavenView extends Component {
 
@@ -8,7 +11,12 @@ class MapHavenView extends Component {
         const positionOption = { timeout: 500, enableHighAccuracy: true };
         const gpsSuccess = currentPosition => {
             //use gps position
-            console.log(currentPosition);
+            console.log(currentPosition.coords.latitude);
+            console.log(currentPosition.coords.longitude);
+            // this.setState({
+            //     latitude: currentPosition.coords.latitude,
+            //     longitude: currentPosition.coords.longitude
+            // });
         };
         const gpsFailed = () => {
             //use some 3rd party position solution(get position by your device ip)
@@ -17,17 +25,22 @@ class MapHavenView extends Component {
         navigator.geolocation.getCurrentPosition(gpsSuccess, gpsFailed, positionOption);
     }
 
+    onRegionChangeComplete(ar) {
+        this.props.regionChanged(ar);
+    }
+
     render() {
-        return (
-            <MapView
-                style={styles.map}
-                initialRegion={{
-                    latitude: 37.7825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-            />
+		return (
+            <View style={{ flex: 1 }}>
+				<Text>Long: {this.props.region.longitude}</Text>
+				<Text>Lat: {this.props.region.latitude}</Text>
+                <MapView
+                    loadingEnabled
+                    style={styles.map}
+                    region={this.props.region}
+                    onRegionChangeComplete={this.onRegionChangeComplete.bind(this)}
+                />
+            </View>
         );
     }
 }
@@ -44,11 +57,15 @@ const styles = StyleSheet.create({
   },
   map: {
     position: 'absolute',
-    top: 0,
+    top: 100,
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: 50,
   },
 });
 
-export default MapHavenView;
+const mapStateToProps = ({ maps }) => ({
+	region: maps.region
+});
+
+export default connect(mapStateToProps, { regionChanged })(MapHavenView);

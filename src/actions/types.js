@@ -7,3 +7,4 @@ export const HAVEN_FORM_UPDATE = 'haven_form_update';
 export const HAVEN_CREATE_SUCCESS = 'haven_create_success';
 export const HAVENS_FETCH_SUCCESS = 'havens_fetch_success';
 export const HAVEN_EDIT_SUCCESS = 'haven_edit_success';
+export const MAP_REGION_CHANGED = 'map_region_changed';

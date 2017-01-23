@@ -4,11 +4,13 @@ import selection from './selection';
 import AuthReducer from './AuthReducer';
 import HavenFormReducer from './HavenFormReducer';
 import HavenListReducer from './HavenListReducer';
+import MapReducer from './MapReducer';
 
 export default combineReducers({
     libraries,
     selectedLibraryId: selection,
     auth: AuthReducer,
     havenForm: HavenFormReducer,
-    havens: HavenListReducer
+    havens: HavenListReducer,
+    maps: MapReducer,
 });
